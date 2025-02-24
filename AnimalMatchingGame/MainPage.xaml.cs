@@ -34,7 +34,7 @@
             Dispatcher.StartTimer(TimeSpan.FromSeconds(.1), TimerTick);
         }
 
-
+        int bestTime = 0;
         int tenthsOfSecondsElapsed = 0;
         private bool TimerTick()
         {
@@ -46,6 +46,12 @@
 
             if(PlayAgainButton.IsVisible)
             {
+                if (bestTime == 0 || bestTime > tenthsOfSecondsElapsed)
+                {
+                    bestTime = tenthsOfSecondsElapsed;
+                    BestTime.Text = "The best time is " + (tenthsOfSecondsElapsed / 10F).ToString("0.0s");
+                }
+
                 tenthsOfSecondsElapsed = 0;
                 return false;
             }
